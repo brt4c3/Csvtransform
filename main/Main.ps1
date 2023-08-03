@@ -12,15 +12,13 @@ $modulePath = Join-Path $currentDirectory "MyModule.psm1"
 
 # Change the current directory to the script's directory
 Set-Location $PSScriptRoot
+Write-Host $PSScriptRoot
 
 # Load the MyModule module
 Import-Module -Name $modulePath -Force
-
+Write-Host $modulePath
 # Import the functions from MyFunction.ps1
 . .\MyFunction.ps1
-
-# Check if the input CSV file is missing the delimiter
-Check-CsvDelimiter -InputFilePath ".\input\sample.csv" -logFilePath $logFilePath
 
 # Call the Export-CSVWithColumns function with arguments
 Export-CSVWithColumns -InputFilePath ".\input\sample.csv" -OutputFilePath ".\output\output.csv" -ConfigFilePath ".\ColumnsConfig.psd1" -logFilePath $logFilePath

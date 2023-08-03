@@ -9,7 +9,7 @@ function Create-ErrorLogFile {
 }
 
 # Load the LogModule module
-$modulePath = Join-Path $PSScriptRoot "LogModule.psm1"
+$modulePath = Join-Path $PSScriptRoot "log\LogModule.psm1"
 Import-Module -Name $modulePath -Force
 
 # Create the error log file

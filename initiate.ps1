@@ -10,10 +10,10 @@ Set-Location $PSScriptRoot
 
 # Execute the ErrorLogging.ps1 script
 . $logScriptPath
-
+Write-Host $logScriptPath
 # Load the MyFunction script
 . $myFunctionScriptPath
-
+Write-Host  $myFunctionScriptPath
 # Execute the Main.ps1 script and pass the $logFilePath as an argument
 $logFilePath = Create-ErrorLogFile
 . $mainScriptPath -logFilePath $logFilePath
