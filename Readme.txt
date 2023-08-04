@@ -11,3 +11,6 @@
   - ErrorLogging.ps1
   - LogModule.psm1
 
+branch 編集中です
+
+新たなコミット
