@@ -1,14 +1,14 @@
 - initiate.ps1
 - main/
-  - ColumnsConfig.psd1
+  - TableConfig.psd1
   - MyFunction.ps1
   - MyModule.psm1
-  - Main.ps1
+  - CsvConvert.ps1
   - input/
     - sample.csv
   - output/
 - log/
-  - ErrorLogging.ps1
-  - LogModule.psm1
+  - CsvConvertLogging.ps1
+  - CsvConvertLogModule.psm1
 
 test

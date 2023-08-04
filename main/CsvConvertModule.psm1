@@ -1,19 +1,19 @@
-# main/MyFunction.ps1
-
+# main/CsvConvertModule.psm1
 function Export-CSVWithColumns {
     param (
         [string]$InputFilePath,
         [string]$OutputFilePath,
-        [string]$ConfigFilePath,
-        [string]$logFilePath
+        [string]$TableConfigFilePath,
+        [string]$logFilePath,
+        [string]$CsvConvertFolderPath
     )
 
     # Load the configuration from the .psd1 file using Import-PowerShellDataFile
     try {
-        $config = Import-PowerShellDataFile -Path $ConfigFilePath
+        $config = Import-PowerShellDataFile -Path $TableConfigFilePath
         $columns = $config.Columns -split ','
     } catch {
-        $errorMessage = "Error: Unable to load configuration from $ConfigFilePath. Make sure the file is properly formatted."
+        $errorMessage = "Error: Unable to load configuration from $TableConfigFilePath. Make sure the file is properly formatted."
         Write-Host $errorMessage
         Write-Output "$(Get-Date -Format "yyyy-MM-dd HH:mm:ss"): $errorMessage" | Out-File -Append -FilePath $logFilePath
         return
