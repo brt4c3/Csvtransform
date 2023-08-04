@@ -11,3 +11,4 @@
   - ErrorLogging.ps1
   - LogModule.psm1
 
+test
