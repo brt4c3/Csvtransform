@@ -4,6 +4,7 @@
   - MyFunction.ps1
   - MyModule.psm1
   - CsvConvert.ps1
+  - Psql-Query.ps1
   - input/
     - sample.csv
   - output/
