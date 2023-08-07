@@ -15,7 +15,7 @@ Import-Module -Name $CsvConvertLogModulePath -Force
 #$logFilePath = Export-logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderPath
 
 # Start error logging
-Start-ErrorLogging -LogPath $CsvConvertLogFolderPath
+Start-ErrorLogging -LogPath $CsvConvertLogFolderPath -logFileName $logFileName
 
 # Call the script containing CsvConvert.ps1 and pass the $logFilePath as an argument
 #Invoke-Expression "& '$mainScriptPath' -logFilePath '$logFilePath' -logFilePath '$logFilePath' -CsvConvertModulePath '$CsvConvertModulePath' -TableConfigFilePath '$TableConfigFilePath' -CsvConvertFolderPath '$CsvConvertFolderPath'"
