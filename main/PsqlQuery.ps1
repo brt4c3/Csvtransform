@@ -20,13 +20,13 @@ $QueryFileName = "SampleQuery.sql"
 $PsqlQuery = Join-Path $CsvConvertFolderPath $QueryFileName
 
 # Configure the location for the log file and output.csv file
-$output_file = "C:\work\output.csv"
+$output_file = "C:\work\QueryResult.csv"
 
 # Set the PGPASSWORD environment variable with your PostgreSQL password
 $env:PGPASSWORD = $PsqlPassword
 
 try {
-    & $pg_bin -h $PsqlServer -U $PsqlUser -f $PsqlQuery -d $PsqlDatabase -p $PsqlPort -A -F "," | Out-File -FilePath $output_file -Encoding UTF8
+    & $pg_bin -h $PsqlServer -U $PsqlUser -f $PsqlQuery -d $PsqlDbName -p $PsqlPort -A -F "," | Out-File -FilePath $output_file -Encoding UTF8
     Write-Host "Command executed successfully!"
 } catch {
     $errorMessage = $_.Exception.Message
