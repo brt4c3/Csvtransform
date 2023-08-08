@@ -30,7 +30,7 @@ $logFilePath = Export-logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderP
 . $logScriptPath -CsvConvertLogModulePath $CsvConvertLogModulePath -LogScriptPath $LogScriptPath -CsvConvertLogFolderPath $CsvConvertLogFolderPath -CsvConvertScriptPath $CsvConvertScriptPath -TableConfigFilePath $TableConfigFilePath -CsvConvertFolderPath $CsvConvertFolderPath -logFileName $logFileName
 
 # Execute the PsqlQuery.ps1 script Write-Out to TableConfig.psd1
-. $PsqlQueryFilePath -CsvConvertFolderPath $CsvConvertFolderPath -PsqlConfigFilePath $PsqlConfigFilePath
+. $PsqlQueryFilePath -CsvConvertFolderPath $CsvConvertFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath 
 
 # Execute the CsvConvert.ps1 script by reading the TableConfig.psd1  
 . $CsvConvertScriptPath -logFilePath $logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderPath -CsvConvertModulePath $CsvConvertModulePath -TableConfigFilePath $TableConfigFilePath -CsvConvertFolderPath $CsvConvertFolderPath
