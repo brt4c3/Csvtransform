@@ -1,12 +1,12 @@
 # CsvConvertLogModule.psm1
 function Start-ErrorLogging {
     param (
-        [string]$CsvConvertLogFolderPath
+        [string]$CsvConvertLogFolderPath,
+        [string]$logFilePath 
     )
 
     #$logFileName = (Get-Date).ToString("yyyyMMdd_HHmmss") + "_error.log"
     #$logFilePath = Join-Path $CsvConvertLogFolderPath $logFileName
-    $logFilePath = Export-logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderPath
     Start-Transcript -Path $logFilePath
     
 }
