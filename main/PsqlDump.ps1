@@ -20,20 +20,18 @@ $timestamp = $timestamp = Get-Date -Format "yyyyMMdd"
 $Timestamp2 = Get-Date -Format "yyyy/MM/dd hh:mm:ss"
 
 # Configure the location for the log file and output.csv file
-$output_file = "C:\work\rkbkup_$timestamp.dump"
-$svrunLogFile = "C:\work\log\svrun_$timstamp.log"
+$output_file = "dump\rkbkup_$timestamp.dmp"
+$svrunLogFile = "log\svrun_$timstamp.log"
 
 # Set the PGPASSWORD environment variable with your PostgreSQL password
 $env:PGPASSWORD = $PsqlPassword
 
 try {
-    & $pg_dump -h $PsqlServer -U $PsqlUser -f $PsqlQuery -d $PsqlDbName -p $PsqlPort -A -F "," | Out-File -FilePath $output_file -Encoding UTF8
-    "ユーザ、組織情報の取り込み開始。 $Timestamp2 " | Out-File -FilePath $svrunLogFile -Encoding UTF8
-    Write-Host "Command executed successfully!"
+    & $pg_dump -h $PsqlServer -U $PsqlUser -f $PsqlQuery -d $PsqlDbName -p $PsqlPort -A -F "," | Out-File -FilePath $output_file 
+    "$(Get-Date -Format "yyyy/MM/dd/HH:mm:ss"): Dump file has been exported $Timestamp2 " | Out-File -FilePath $svrunLogFile 
 } catch {
     $errorMessage = $_.Exception.Message
-    Write-Host "Error occurred: $errorMessage"
-    $errorMessage | Out-File -FilePath $logFilePath -Encoding UTF8 -Append
+    "$(Get-Date -Format "yyyy/MM/dd/HH:mm:ss"): $errorMessage" | Out-File -FilePath $logFilePath -Append
 } finally {
     # Unset the PGPASSWORD environment variable after executing the command
     $env:PGPASSWORD = $null
