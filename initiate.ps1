@@ -34,11 +34,14 @@ $logFilePath = Export-logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderP
     
 }
 
+# Set the Query file for the SQL injection 
+$QueryFileName = "SampleQuery.sql"
+
 # Execute the PsqlQuery.ps1 script Write-Out to TableConfig.psd1
-. $PsqlQueryFilePath -CsvConvertFolderPath $CsvConvertFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath 
+. $PsqlQueryFilePath -CsvConvertFolderPath $CsvConvertFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath -QueryFileName $QueryFileName
 
 # Execute the PsqlDump.ps1 script Write-Out to TableConfig.psd1
-. $PsqlDumpFilePath -CsvConvertFolderPath $CsvConvertFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath
+. $PsqlDumpFilePath -CsvConvertFolderPath $CsvConvertFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderPath 
 
 # Execute the CsvConvert.ps1 script by reading the TableConfig.psd1  
 . $CsvConvertScriptPath -InputFilePath $InputFilePath -OutputFilePath $OutputFilePath -logFilePath $logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderPath -CsvConvertModulePath $CsvConvertModulePath -TableConfigFilePath $TableConfigFilePath -CsvConvertFolderPath $CsvConvertFolderPath

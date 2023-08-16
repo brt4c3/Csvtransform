@@ -1,7 +1,8 @@
 param (
     [string]$CsvConvertFolderPath,
     [string]$PsqlConfigFilePath,
-    [string]$logFilePath 
+    [string]$logFilePath,
+    [string]$CsvConvertLogFolderPath 
 )
 
 # Make sure the psql.exe file path is Correct
@@ -20,8 +21,8 @@ $timestamp = $timestamp = Get-Date -Format "yyyyMMdd"
 $Timestamp2 = Get-Date -Format "yyyy/MM/dd hh:mm:ss"
 
 # Configure the location for the log file and output.csv file
-$output_file = "dump\rkbkup_$timestamp.dmp"
-$svrunLogFile = "log\svrun_$timstamp.log"
+$output_file = Join-Path $CsvConvertFolderPath "dump\bkup_$timestamp.dmp"
+$svrunLogFile = Join-Path $CsvConvertLogFolderPath "svrun_$timstamp.log"
 
 # Set the PGPASSWORD environment variable with your PostgreSQL password
 $env:PGPASSWORD = $PsqlPassword
