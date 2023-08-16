@@ -4,5 +4,5 @@ PsqlServer = "localhost"
 PsqlUser = "postgres"
 PsqlDbName = "postgres"
 PsqlPort = 5432
-PsqlPassword = "YourPasswordHere"
+PsqlPassword = "password"
 }

@@ -5,7 +5,7 @@ function Export-CSVWithColumns {
         [string]$OutputFilePath,
         [string]$TableConfigFilePath,
         [string]$logFilePath,
-        [string]$CsvConvertFolderPath
+        [string]$MainFolderPath
     )
 
     # Load the configuration from the .psd1 file using Import-PowerShellDataFile

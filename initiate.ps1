@@ -18,7 +18,7 @@ $PsqlConfigFilePath = Join-Path $PSScriptRoot "main\PsqlConfig.psd1"
 
 #Get the Folder Path 
 $CsvConvertLogFolderPath = Join-Path $PSScriptRoot "log"
-$CsvConvertFolderPath = Join-Path $PSScriptRoot "main"
+$MainFolderPath = Join-Path $PSScriptRoot "main"
 
 #Get the input output Files path
 $InputFilePath = Join-Path $PSScriptRoot "main\input\sample.csv"
@@ -30,15 +30,24 @@ Import-Module -Name $CsvConvertLogModulePath -Force
 try{
 # Create the error log file and export the logFileName
 $logFilePath = Export-logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderPath
-}catch{
-    
-}
+}catch{}
+
+#importCsv from PSQL
+$ImportCsv = Join-Path $PSScriptRoot "main\ImportCsvPsql.ps1"
+. $ImportCsv -MainFolderPath $MainFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath -QueryFileName $QueryFileName
+
+#exportCsv from PSQL
+$ExportCsv = Join-Path $PSScriptRoot "main\ExportCsvPsql.ps1"
+. $ExportCsv -MainFolderPath $MainFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath -QueryFileName $QueryFileName
+
+# Set the Query file for the SQL injection 
+$QueryFileName = "Select-Query.sql"
 
 # Execute the PsqlQuery.ps1 script Write-Out to TableConfig.psd1
-. $PsqlQueryFilePath -CsvConvertFolderPath $CsvConvertFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath 
+. $PsqlQueryFilePath -MainFolderPath $MainFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath -QueryFileName $QueryFileName
 
 # Execute the PsqlDump.ps1 script Write-Out to TableConfig.psd1
-. $PsqlDumpFilePath -CsvConvertFolderPath $CsvConvertFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath
+. $PsqlDumpFilePath -MainFolderPath $MainFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderPath 
 
 # Execute the CsvConvert.ps1 script by reading the TableConfig.psd1  
-. $CsvConvertScriptPath -InputFilePath $InputFilePath -OutputFilePath $OutputFilePath -logFilePath $logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderPath -CsvConvertModulePath $CsvConvertModulePath -TableConfigFilePath $TableConfigFilePath -CsvConvertFolderPath $CsvConvertFolderPath
+. $CsvConvertScriptPath -InputFilePath $InputFilePath -OutputFilePath $OutputFilePath -logFilePath $logFilePath -CsvConvertLogFolderPath $CsvConvertLogFolderPath -CsvConvertModulePath $CsvConvertModulePath -TableConfigFilePath $TableConfigFilePath -MainFolderPath $MainFolderPath
