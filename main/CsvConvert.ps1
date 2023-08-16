@@ -5,7 +5,7 @@ param (
     [string]$CsvConvertLogFolderPath,
     [string]$CsvConvertModulePath,
     [string]$TableConfigFilePath,
-    [string]$CsvConvertFolderPath,
+    [string]$MainFolderPath,
     [string]$CsvConvertLogModulePath,
     [string]$mainScriptPath,
     [string]$InputFilePath,
@@ -15,5 +15,5 @@ param (
 Import-Module -Name $CsvConvertModulePath -Force
 
 # Call the Export-CSVWithColumns function with arguments
-Export-CSVWithColumns -InputFilePath $InputFilePath -OutputFilePath $OutputFilePath -TableConfigFilePath $TableConfigFilePath -logFilePath $logFilePath -CsvConvertFolderPath $CsvConvertFolderPath
+Export-CSVWithColumns -InputFilePath $InputFilePath -OutputFilePath $OutputFilePath -TableConfigFilePath $TableConfigFilePath -logFilePath $logFilePath -MainFolderPath $MainFolderPath
 
