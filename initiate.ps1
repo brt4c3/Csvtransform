@@ -41,7 +41,7 @@ $ExportCsv = Join-Path $PSScriptRoot "main\ExportCsvPsql.ps1"
 . $ExportCsv -MainFolderPath $MainFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath -QueryFileName $QueryFileName
 
 # Set the Query file for the SQL injection 
-$QueryFileName = "SampleQuery.sql"
+$QueryFileName = "Select-Query.sql"
 
 # Execute the PsqlQuery.ps1 script Write-Out to TableConfig.psd1
 . $PsqlQueryFilePath -MainFolderPath $MainFolderPath -PsqlConfigFilePath $PsqlConfigFilePath -logFilePath $logFilePath -QueryFileName $QueryFileName

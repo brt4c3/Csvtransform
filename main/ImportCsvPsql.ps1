@@ -22,16 +22,24 @@ $ImportCsv = Join-Path $MainFolderPath "output/output.csv"
 # Set the PGPASSWORD environment variable with your PostgreSQL password
 $env:PGPASSWORD = $PsqlPassword
 
+# Set the Variables for constructing the Commandline for psql
+$TableName = "テスト"
+$CommandLine = \COPY $TableName FROM '$ImportCsv' WITH CSV WITH HEADER
+$LogHeader = Get-Date -Format "yyyy/MM/dd/HH:mm:ss"
+$errorMessage = $null
+
 try {
-    & $pg_bin -h $PsqlServer -U $PsqlUser -d $PsqlDbName -p $PsqlPort "$("COPY "テスト" FROM $ImportCsv WITH CSV")" ;
-    "$(Get-Date -Format "yyyy/MM/dd/HH:mm:ss"): Command executed successfully!"| Out-File -FilePath $logFilePath -Append
-    "$(Get-Date -Format "yyyy/MM/dd/HH:mm:ss"): Import from $ImportCsv" | Out-File -FilePath $logFilePath -Append
+    & $pg_bin -h $PsqlServer -U $PsqlUser -d $PsqlDbName -p $PsqlPort -c $CommandLine 
 } catch {
     $errorMessage = $_.Exception.Message
-    "$(Get-Date -Format "yyyy/MM/dd/HH:mm:ss"): $errorMessage" | Out-File -FilePath $logFilePath -Append
-    "$(Get-Date -Format "yyyy/MM/dd/HH:mm:ss"): Import from $ImportCsv" | Out-File -FilePath $logFilePath -Append
 } finally {
     # Unset the PGPASSWORD environment variable after executing the command
     $env:PGPASSWORD = $null
+    if($null -eq $errorMessage) {
+            "$LogHeader : Successfully Imported" | Out-File -FilePath $logFilePath -Append
+    } else {
+            "$LogHeader : '$errorMessage'" | Out-File -FilePath $logFilePath -Append
+    }
+    "$LogHeader : Import from '$ImportCsv'" | Out-File -FilePath $logFilePath -Append
 }
 
