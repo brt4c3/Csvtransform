@@ -1,3 +1,4 @@
+# PgDump.ps1
 param (
     [string]$MainFolderPath,
     [string]$PsqlConfigFilePath,

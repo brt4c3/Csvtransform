@@ -1,4 +1,4 @@
-# PsqlConfig.psd1
+# ConfigPsql.psd1
 @{
 PsqlServer = "localhost"
 PsqlUser = "postgres"

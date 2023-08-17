@@ -10,7 +10,7 @@ $deleteThresholdDate = (Get-Date).AddDays(-$daysToKeep)
 # ログファイルの削除
 Get-ChildItem -Path $logFolderPath -Filter "*.log" | ForEach-Object {
     $logFileName = $_.Name
-    $logFileDate = [datetime]::ParseExact($logFileName.Substring(0, 15), "yyyyMMdd_HHmmss", $null)
+    $logFileDate = [datetime]::ParseExact($logFileName.Substring(0, 10), "yyyyMMdd_HHmmss", $null)
 
     if ($logFileDate -lt $deleteThresholdDate) {
         Write-Host "Deleting old log file: $logFileName"
