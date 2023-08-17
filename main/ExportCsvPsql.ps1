@@ -2,8 +2,7 @@
 param (
     [string]$MainFolderPath,
     [string]$PsqlConfigFilePath,
-    [string]$logFilePath,
-    [string]$QueryFileName
+    [string]$logFilePath
 )
 
 # Make sure the psql.exe file path is Correct
@@ -24,13 +23,18 @@ $ExportCsv = Join-Path $MainFolderPath "output/exportfromPSQL.csv"
 $env:PGPASSWORD = $PsqlPassword
 
 # Set the Variables for constructing the Commandline for psql
-$TableName = "テスト"
-$CommandLine = \COPY $TableName TO '$ExportCsv' WITH CSV HEADER
 $LogHeader = Get-Date -Format "yyyy/MM/dd/HH:mm:ss"
 $errorMessage = $null
 
+# Create the SQL file with customized variabales
+$TableName = 'テスト'
+$ExportCsv = "output\export_$TableName.csv"
+$Sql_ExportCsv = "COPY (SELECT * FROM $TableName) TO '$ExportCsv' (FORMAT CSV)"
+$ExportSqlFile = Join-Path $MainFolderPath "ExportCsv.sql"
+$Sql_ExportCsv | Out-File -FilePath $ExportSql
+
 try {
-    & $pg_bin -h $PsqlServer -U $PsqlUser -d $PsqlDbName -p $PsqlPort -c $CommandLine
+    & $pg_bin -h $PsqlServer -U $PsqlUser -d $PsqlDbName -p $PsqlPort -f $ExportSqlFile
 } catch {
     $errorMessage = $_.Exception.Message
 } finally {

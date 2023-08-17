@@ -23,13 +23,18 @@ $ImportCsv = Join-Path $MainFolderPath "output/output.csv"
 $env:PGPASSWORD = $PsqlPassword
 
 # Set the Variables for constructing the Commandline for psql
-$TableName = "テスト"
-$CommandLine = \COPY $TableName FROM '$ImportCsv' WITH CSV WITH HEADER
 $LogHeader = Get-Date -Format "yyyy/MM/dd/HH:mm:ss"
 $errorMessage = $null
 
+# Create the SQL file with customized variabales
+$TableName = 'テスト'
+$ImportCsv = "input\Import_$TableName.csv"
+$Sql_ImportCsv = "COPY (SELECT * FROM $TableName) FROM '$ImportCsv' (FORMAT CSV WITH HEADER)"
+$ImportSqlFile = Join-Path $MainFolderPath "ExportCsv.sql"
+$Sql_ImportCsv | Out-File -FilePath $ImportSql
+
 try {
-    & $pg_bin -h $PsqlServer -U $PsqlUser -d $PsqlDbName -p $PsqlPort -c $CommandLine 
+    & $pg_bin -h $PsqlServer -U $PsqlUser -d $PsqlDbName -p $PsqlPort -f $ImportSqlFile
 } catch {
     $errorMessage = $_.Exception.Message
 } finally {
