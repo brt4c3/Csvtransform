@@ -1,3 +1,6 @@
+# 概要
+Psql を使用したPowershellスクリプトの例をモジュールとして紹介しています。
+
 //* MAP of this Project
 - initiate.ps1
 - main/
