@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  psql: 
+    image: "postgres:14-alpine3.14"
+    container_name: run-psql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"  
+      POSTGRES_DB: "postgres"
+      POSTGRES_PASSWORD: "password"
+    volumes:
+      - "./psql/bin:/usr/lib/postgresql/14/bin"
+      - "./psql/initdb.d:/docker-entrypoint-initdb.d"
+    networks: 
+      - DbCon
+
+  ubuntu:
+    image: "ubuntu:focal"
+    volumes:
+      - "./:/home"
+    environment:
+      LANGUAGE: "en_US.UTF-8"
+      LC_ALL: "en_US.UTF-8"
+    command: >
+      bash -c "
+      apt-get update && \
+      apt-get install -y locales && \
+      locale-gen en_US.UTF-8 && \
+      apt-get install -y postgresql wget && \
+      wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.1/powershell_7.4.1-1.deb_amd64.deb && \
+      dpkg -i powershell_7.4.1-1.deb_amd64.deb && \
+      exec bash"
+    networks: 
+      - DbCon 
+
+  phppgadmin:
+    container_name: php-PgAdmin
+    image: docker.io/dpage/pgadmin4:latest
+    ports:
+      - "8080:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    networks:
+      - DbCon
+    depends_on:
+      - psql
+
+networks:
+  DbCon:
+    driver: bridge

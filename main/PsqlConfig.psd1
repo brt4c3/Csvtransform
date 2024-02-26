@@ -1,8 +1,8 @@
 # PsqlConfig.psd1
 @{
-PsqlServer = "localhost"
+PsqlServer = "psql"
 PsqlUser = "postgres"
 PsqlDbName = "postgres"
 PsqlPort = 5432
-PsqlPassword = "YourPasswordHere"
+PsqlPassword = "password"
 }

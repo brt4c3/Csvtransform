@@ -37,4 +37,28 @@ write-out to 'yyyyMMdd_HHmmss'_error.log
 *//
 
 
-editting
+# Docker Image Documentation
+See here for PowerShell-Docker
+https://github.com/PowerShell/PowerShell-Docker/tree/master
+## Usage 
+```
+Usage: pwsh[.exe] [-Login] [[-File] <filePath> [args]]
+                  [-Command { - | <script-block> [-args <arg-array>]
+                                | <string> [<CommandParameters>] } ]
+                   [-CommandWithArgs <string> [<CommandParameters>]
+                   [-ConfigurationName <string>] [-ConfigurationFile <filePath>]
+                   [-CustomPipeName <string>] [-EncodedCommand <Base64EncodedCommand>]
+                   [-ExecutionPolicy <ExecutionPolicy>] [-InputFormat {Text | XML}]
+                   [-Interactive] [-MTA] [-NoExit] [-NoLogo] [-NonInteractive] [-NoProfile]
+                   [-NoProfileLoadTime] [-OutputFormat {Text | XML}] 
+                   [-SettingsFile <filePath>] [-SSHServerMode] [-STA] 
+                   [-Version] [-WindowStyle <style>] 
+                   [-WorkingDirectory <directoryPath>]
+ 
+        pwsh[.exe] -h | -Help | -? | /?
+ 
+ PowerShell Online Help https://aka.ms/powershell-docs
+```
+
+# See here for PosgreSQL Docker Documentation
+https://hub.docker.com/layers/library/postgres/14/images/sha256-54c27ef60bfde62c39a04974ed8c4ea6a4e1737217635d6471e54378e830b44f?context=explore
