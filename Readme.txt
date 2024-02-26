@@ -1,5 +1,6 @@
 # 概要
-Psql を使用したPowershellスクリプトの例をモジュールとして紹介しています。
+Psql Toolを使用したPowershellスクリプトの例をモジュールとして紹介しています。
+※Widows OS 上でのみ使用可能です。
 
 //* MAP of this Project
 - initiate.ps1
